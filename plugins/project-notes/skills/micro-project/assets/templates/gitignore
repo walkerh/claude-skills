@@ -1,0 +1,5 @@
+.DS_Store
+inbox/*
+!inbox/README.md
+local/
+_to_delete/

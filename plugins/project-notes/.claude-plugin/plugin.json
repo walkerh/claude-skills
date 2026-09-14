@@ -1,0 +1,12 @@
+{
+  "name": "project-notes",
+  "description": "Keep a lightweight per-project wiki of what is known, what is open, and what needs doing, and turn meeting or call transcripts into clean speaker-attributed text worth writing from.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Walker Hale IV"
+  },
+  "homepage": "https://github.com/walkerh/claude-skills",
+  "repository": "https://github.com/walkerh/claude-skills",
+  "license": "MIT",
+  "keywords": ["notes", "wiki", "transcript", "meetings", "project-management"]
+}

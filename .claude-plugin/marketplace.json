@@ -1,0 +1,21 @@
+{
+  "name": "hale-skills",
+  "description": "Claude Code skills for git release workflow and project note-keeping.",
+  "owner": {
+    "name": "Walker Hale IV"
+  },
+  "plugins": [
+    {
+      "name": "dev-workflow",
+      "source": "./plugins/dev-workflow",
+      "description": "Version bumping, pull request creation, and worktree validation.",
+      "category": "workflow"
+    },
+    {
+      "name": "project-notes",
+      "source": "./plugins/project-notes",
+      "description": "Per-project wiki scaffolding and transcript conversion.",
+      "category": "productivity"
+    }
+  ]
+}

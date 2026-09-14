@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+uv.lock
+.DS_Store
+/local/
+
+# Plugin eval output
+**/evals/results/

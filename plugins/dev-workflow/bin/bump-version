@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+"""
+bump-version: Bump the version in pyproject.toml and create an annotated tag.
+
+Usage:
+    bump-version VERSION [FILE]   # read tag message from FILE
+    bump-version VERSION          # read tag message from stdin
+
+Behaves like `cat [FILE]`: reads from FILE when given, otherwise stdin.
+
+Limitations:
+    - Only supports pyproject.toml-based Python projects (PEP 517/518).
+    - Requires a bare string literal: version = "x.y.z" under [project].
+    - Does not support dynamic versioning (setuptools-scm, hatch-vcs, etc.).
+    - Replaces the first matching `version = "..."` line in the file; a
+      pyproject.toml with multiple such lines (unusual) may need manual review.
+    - Commit message is always: "Bump version to VERSION".
+    - Tag name is always: "vVERSION". No support for alternative prefixes.
+    - Does not push the commit or tag; the caller is responsible for pushing.
+    - Assumes the current working directory is the project root.
+"""
+
+import re
+import sys
+import subprocess
+from pathlib import Path
+
+
+VERSION_RE = re.compile(r'^version\s*=\s*"[^"]*"', re.MULTILINE)
+
+
+def die(msg: str) -> None:
+    print(f"bump-version: {msg}", file=sys.stderr)
+    sys.exit(1)
+
+
+def main() -> None:
+    args = sys.argv[1:]
+    if not args or len(args) > 2:
+        die("usage: bump-version VERSION [FILE]")
+
+    version = args[0]
+
+    if len(args) == 2:
+        path = Path(args[1])
+        try:
+            message = path.read_text()
+        except OSError as e:
+            die(str(e))
+    else:
+        message = sys.stdin.read()
+
+    message = message.strip()
+    if not message:
+        die("tag message is empty")
+
+    pyproject = Path("pyproject.toml")
+    if not pyproject.exists():
+        die("pyproject.toml not found in current directory")
+
+    content = pyproject.read_text()
+
+    if not VERSION_RE.search(content):
+        die('no version = "..." field found in pyproject.toml')
+
+    new_content = VERSION_RE.sub(f'version = "{version}"', content, count=1)
+    pyproject.write_text(new_content)
+
+    try:
+        subprocess.run(["git", "add", "pyproject.toml"], check=True)
+        subprocess.run(
+            ["git", "commit", "-m", f"Bump version to {version}"],
+            check=True,
+        )
+        subprocess.run(
+            ["git", "tag", "-a", f"v{version}", "-m", message],
+            check=True,
+        )
+    except subprocess.CalledProcessError as e:
+        die(f"git command failed: {e}")
+
+
+if __name__ == "__main__":
+    main()

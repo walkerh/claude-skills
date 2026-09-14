@@ -1,0 +1,12 @@
+{
+  "name": "dev-workflow",
+  "description": "Git and release workflow skills: version bumping with AI-composed tag messages, pull request creation with a prepared merge commit message, and Claude worktree validation.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Walker Hale IV"
+  },
+  "homepage": "https://github.com/walkerh/claude-skills",
+  "repository": "https://github.com/walkerh/claude-skills",
+  "license": "MIT",
+  "keywords": ["git", "release", "pull-request", "versioning", "worktree"]
+}
