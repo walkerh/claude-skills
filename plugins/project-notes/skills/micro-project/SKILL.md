@@ -78,8 +78,9 @@ session. The short version:
    one-line purpose if it is not obvious from the folder's contents or the
    conversation.
 3. If `inbox/` does not exist, create it with its `README.md`.
-4. `git init`, then commit the scaffold as `Initialize micro-project`. No remote
-   unless asked.
+4. `git init` — but see **Synced folders** below first, because the form of the
+   command depends on where the project lives. Then commit the scaffold as
+   `Initialize micro-project`. No remote unless asked.
 5. If the folder already contains raw material, say so and offer to process it —
    do not process it unprompted.
 
@@ -169,6 +170,39 @@ an open question older than a few weeks with no movement is a finding in itself.
 unless asked. `inbox/` and `local/` are gitignored. Commit messages describe the
 change to the project's understanding, not the file operation: `Record dbGaP
 study accession and consent group decision`, not `Update NOTES.md`.
+
+### Synced folders
+
+**When the project folder is inside a cloud-synced tree** — OneDrive, Google
+Drive, Dropbox, iCloud Drive — do not let `.git/` live there. The sync client
+churns constantly on loose objects, index and lock files; it can corrupt a
+repository, and it uploads history no one asked it to.
+
+Instead, keep the working tree in the synced folder and put the git directory
+outside it:
+
+```bash
+git init --separate-git-dir=<repo-home>/<project-name>.git
+```
+
+This leaves a one-line `.git` *file* in the project folder pointing at the real
+git directory, which is enough for every ordinary git command run from inside
+the working tree. It also works on an existing repository — running it against a
+repo whose `.git/` is still a directory relocates the history and leaves the
+pointer behind, preserving every commit.
+
+Ask where `<repo-home>` should be if you do not already know; users generally
+have one place their repositories live, and often a dedicated subdirectory for
+this pattern. Check for an existing example before inventing a location — if a
+sibling project in the same synced tree already has a `.git` file, read it and
+follow that convention.
+
+Two consequences worth telling the user once:
+
+- The git directory is now outside the synced folder, so **history is no longer
+  backed up by the sync service**. A remote or a local backup covers it.
+- `core.worktree` is normally left unset, so git commands must be run from
+  inside the working tree, not from the git directory.
 
 **When the folder is a mounted share** — a Cowork device-bridge mount, or any
 filesystem that refuses `unlink` — git cannot remove its own lock files, so
