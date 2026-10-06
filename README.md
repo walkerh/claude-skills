@@ -73,11 +73,17 @@ claude plugin validate ./plugins/project-notes --strict
 pytest
 ```
 
-To try changes before pushing, add the working tree as a local marketplace:
+To try changes before pushing, load the working tree for a single session:
 
+```bash
+claude --plugin-dir ./plugins
 ```
-/plugin marketplace add /path/to/claude-skills
-```
+
+`--plugin-dir` takes a plugin directory, or a folder of them as here, and
+loads it for that session only; nothing is written to settings. If the same
+plugin is also installed from the marketplace, the local copy replaces it for
+that session, so there is nothing to disable first. Point at one plugin, such
+as `./plugins/dev-workflow`, to load just that one.
 
 Skills installed from a personal directory (`~/.claude/skills/`) take precedence
 over plugin skills of the same name, so a draft copy left lying around will
