@@ -8,7 +8,7 @@
     {
       "name": "dev-workflow",
       "source": "./plugins/dev-workflow",
-      "description": "Version bumping, pull request creation, and worktree validation.",
+      "description": "Version bumping, pull request creation, review-and-fix rounds, and worktree validation.",
       "category": "workflow"
     },
     {

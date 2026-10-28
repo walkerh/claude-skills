@@ -23,6 +23,7 @@ form works when no other skill claims the name.
 |---|---|
 | `bump-version` | Composes an annotated tag message from recent commits, then bumps `pyproject.toml`, commits, and tags. |
 | `release-pr` | Generates the PR title, body, and merge commit message for the current branch, pushes, and opens the PR. |
+| `review-fix` | Loops review rounds on the current branch, each by a fresh reviewer; fixes chosen findings as autosquashed fixups and turns rejected findings into scope rules in `.claude/CLAUDE.md`. |
 | `validate-worktree` | Checks that the current environment meets Claude worktree requirements. |
 
 **These encode a specific set of conventions.** They will not fit your workflow
@@ -40,6 +41,10 @@ unedited unless you share them:
   no owner prefix.
 - **`pyproject.toml` as the version source.** `bump-version` is Python-project
   specific.
+- **Fixup commits, autosquashed.** `review-fix` folds each fix into the branch
+  commit it corrects, using `git rebase --autosquash` (Git 2.44 or later).
+  Before each session it tags the current head `tNN` so the original can be
+  recovered.
 - **`main` as the base branch**, and the `gh` CLI installed and authenticated.
 
 `bin/` holds the two scripts the skills shell out to and is added to `PATH` when
