@@ -10,6 +10,10 @@ generates enough correspondence, findings and loose ends to need a memory, but
 not enough to justify a full knowledge base. A dbGaP submission. A vendor
 evaluation. Chasing down one recurring failure.
 
+What makes it a micro-project is that it does not fit routine operation. The
+goal is always to get back there: once the remaining work can be carried by
+the normal process, the project is done (see Closeout).
+
 This skill maintains a small wiki in the project folder: what is known, what is
 still open, what needs doing. It has five modes. Identify which one applies
 before doing anything.
@@ -153,12 +157,29 @@ the files. Lead with where the project actually stands, then the open questions
 that are blocking, then the open tasks. Call out anything that has gone stale —
 an open question older than a few weeks with no movement is a finding in itself.
 
+If every open task is routine work that someone else's normal process will
+carry, say that the project is ready to close.
+
 ## Closeout
 
+**When to close.** A micro-project exists because something did not fit
+routine operation. Once every remaining next step can be carried by the
+organization's normal process, the project has done its job, and reaching that
+state closes it. A normal process means a ticket in the standard queue, a
+scheduled job, or a standing workflow with an owner. The work need not have
+entered that process yet. If the next step is something the process does as a
+matter of course (a ticket that will be opened, a job that will pick up the
+data), the process already carries it. Do not keep the project
+open to track routine work, and do not wait for the routine work to start or
+finish. Record the handoff (who owns the work, and the ticket or process that
+carries it) and close out. The user still confirms the close.
+
 1. Write an `## Outcome` section at the top of `README.md`: what happened, the
-   date it concluded, and the final state.
-2. Resolve every open task and every open question. Each one is either closed
-   with its answer or explicitly marked abandoned — nothing is left hanging.
+   date it concluded, the final state, and what routine process now owns any
+   remaining work.
+2. Resolve every open task and every open question. Each one is closed with
+   its answer, handed off to the routine process that now owns it, or
+   explicitly marked abandoned — nothing is left hanging.
 3. Set the status line in `README.md` to `Closed <ISO date>`.
 4. List the facts that deserve promotion to a durable knowledge base, and say
    why for each. **Propose only.** Do not write to another repository.

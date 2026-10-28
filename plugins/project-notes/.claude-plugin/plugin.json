@@ -1,7 +1,7 @@
 {
   "name": "project-notes",
   "description": "Keep a lightweight per-project wiki of what is known, what is open, and what needs doing, and turn meeting or call transcripts into clean speaker-attributed text worth writing from.",
-  "version": "0.1.0",
+  "version": "0.2.0-beta1",
   "author": {
     "name": "Walker Hale IV"
   },
